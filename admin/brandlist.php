@@ -1,38 +1,38 @@
-﻿<?php include 'inc/header.php';?>
+<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
-<?php include_once '../classes/Category.php'; ?>
+<?php include_once '../classes/Brand.php'; ?>
 
 <?php 
 
-$cat = new Category();
-if (isset($_GET['delcat'])) {
-	$id = $_GET['delcat'];
-	$delcat = $cat -> delCatById($id);
+$brand = new Brand();
+if (isset($_GET['delbrand'])) {
+	$id = $_GET['delbrand'];
+	$delbrand = $brand -> delBrandById($id);
 }
 
  ?>
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Category List</h2>
+                <h2>Brand List</h2>
                 <div class="block"> 
-                <?php if (isset($delcat)) {
-                	echo $delcat;
-                } ?>       
+                <?php if (isset($delbrand)) {
+                	echo $delbrand;
+                } ?>        
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
 							<th>Serial No.</th>
-							<th>Category Name</th>
+							<th>Brand Name</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
 					<?php 
 
-					$getCat = $cat->getAllCat();
-					if ($getCat) {
+					$getBrand = $brand->getAllBrand();
+					if ($getBrand) {
 						$i=0;
-						while ($value = $getCat->fetch_assoc()) {
+						while ($value = $getBrand->fetch_assoc()) {
 							$i++;
 						
 					
@@ -40,8 +40,8 @@ if (isset($_GET['delcat'])) {
 					 ?>
 						<tr class="odd gradeX">
 							<td><?php echo $i; ?></td>
-							<td><?php echo $value['catName']; ?></td>
-							<td><a href="catedit.php?catId=<?php echo $value['catId'];?>">Edit</a> || <a onclick="return confirm('Are you Sure To DELETE')" href="?delcat=<?php echo $value['catId'];?>">Delete</a></td>
+							<td><?php echo $value['brandName']; ?></td>
+							<td><a href="brandedit.php?brandId=<?php echo $value['brandId'];?>">Edit</a> || <a onclick="return confirm('Are you Sure To DELETE')" href="?delbrand=<?php echo $value['brandId'];?>">Delete</a></td>
 						</tr>
 						<?php } } ?>
 					</tbody>
