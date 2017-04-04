@@ -29,7 +29,7 @@ class Session{
   self::init();
   if (self::get("adminlogin")== false) {
    self::destroy();
-   header("Location:adminlogin.php");
+   header("Location:login.php");
   }
  }
 
