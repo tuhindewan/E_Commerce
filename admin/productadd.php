@@ -1,11 +1,24 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
+<?php include_once '../classes/Product.php'; ?>
 <?php include_once '../classes/Category.php'; ?>
 <?php include_once '../classes/Brand.php'; ?>
+<?php 
+
+$pd = new Product();
+if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])) {
+
+    $productInsert = $pd->insertProduct($_POST,$_FILES);    
+}
+
+ ?>
 <div class="grid_10">
     <div class="box round first grid">
         <h2>Add New Product</h2>
-        <div class="block">               
+        <div class="block"> 
+        <?php if (isset($productInsert)) {
+            echo $productInsert;
+        } ?>              
          <form action="" method="post" enctype="multipart/form-data">
             <table class="form">
                
