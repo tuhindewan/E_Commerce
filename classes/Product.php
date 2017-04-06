@@ -137,7 +137,7 @@ class Product
 						 }
 						}
 						 else{
-						 	
+
 			 	            $query = "UPDATE tbl_product
 						 				SET 
 						 				productName ='$productName',
@@ -157,6 +157,28 @@ class Product
 								}
 						 }
 		}
+
+   }
+
+   public function delProById($id){
+   	$query = "SELECT * FROM tbl_product WHERE productId = '$id' ";
+   	$getdata = $this->db->select($query);
+   	if ($getdata ) {
+   		while ($getImg = $getdata->fetch_assoc()) {
+   			$unlinkImg = $getImg['image'];
+   			unlink($unlinkImg);
+   		}
+   	}
+
+   	$delquery = "DELETE FROM tbl_product WHERE productId = '$id'";
+		$result= $this->db->delete($delquery);
+		if ($result) {
+				$msg = "<span class='success'>Product has been Deleted Successfully.</span>";
+				return $msg;
+			}else{
+				$msg = "<span class='error'>Product has not been Deleted !</span>";
+				return $msg;
+			}
    }
 
 

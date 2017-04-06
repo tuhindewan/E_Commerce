@@ -8,12 +8,19 @@
 $pd = new Product();
 $fm = new Format();
 
+if (isset($_GET['delPro'])) {
+	$id = $_GET['delPro'];
+	$delPro = $pd -> delProById($id);
+}
 ?>
 
 <div class="grid_10">
     <div class="box round first grid">
         <h2>Post List</h2>
         <div class="block">  
+        <?php if (isset($delPro)) {
+        	echo $delPro;
+        } ?>
             <table class="data display datatable" id="example">
 			<thead>
 				<tr>
@@ -61,7 +68,7 @@ $fm = new Format();
 					?>
 						
 					</td>
-					<td><a href="productEdit.php?proId=<?php echo $result['productId']; ?>">Edit</a> || <a href="">Delete</a></td>
+					<td><a href="productEdit.php?proId=<?php echo $result['productId']; ?>">Edit</a> || <a onclick="return confirm('Are You Sure Want To DELETE')" href="?delPro=<?php echo $result['productId']; ?>">Delete</a></td>
 				</tr>
 
 				<?php }} ?>
