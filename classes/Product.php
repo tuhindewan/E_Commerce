@@ -61,9 +61,16 @@ class Product
    }
 
    public function getAllProduct(){
-   	$query = "SELECT * FROM tbl_product ORDER BY productId DESC";
-   	$result= $this->db->select($query);
-   	return $result;
+   	$query = "SELECT tbl_product.*, tbl_cat.catName, tbl_brand.brandName
+   	          FROM tbl_product
+   	          INNER JOIN tbl_cat
+   	          ON tbl_product.catId = tbl_cat.catId
+   	          INNER JOIN tbl_brand
+   	          ON tbl_product.brandId = tbl_brand.brandId
+   	          ORDER BY tbl_product.productId DESC";
+
+			   	$result= $this->db->select($query);
+			   	return $result;
    }
 
 
