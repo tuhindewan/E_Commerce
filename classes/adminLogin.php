@@ -30,7 +30,7 @@ class adminLogin
 		$adminUser = mysqli_real_escape_string($this->db->link,$adminUser);
 		$adminPass = mysqli_real_escape_string($this->db->link,$adminPass);
 
-		if (empty($adminUser) OR empty($adminPass)) {
+		if (empty($adminUser) || empty($adminPass)) {
 			$loginmsg = "Username or Password cannot be Empty !";
 			return $loginmsg;
 		}else{

@@ -1,10 +1,10 @@
-<?php 
- include_once '../helpers/Format.php'; 
- include_once '../lib/Database.php'; 
+<?php include_once '../helpers/Format.php'; ?>
+<?php include_once '../lib/Database.php'; ?>
 
-class Cart 
+<?php
+
+class Cart
 {
-	
 	private $fm;
 	private $db;
 
@@ -13,7 +13,5 @@ class Cart
 		$this->fm = new Format();
 		$this->db = new Database();
 	}
-
 }
-
 ?>

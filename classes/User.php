@@ -1,11 +1,10 @@
-<?php 
+<?php include_once '../helpers/Format.php'; ?>
+<?php include_once '../lib/Database.php'; ?>
 
- include_once '../helpers/Format.php'; 
- include_once '../lib/Database.php'; 
+<?php
 
-class User 
+class User
 {
-	
 	private $fm;
 	private $db;
 
@@ -14,7 +13,5 @@ class User
 		$this->fm = new Format();
 		$this->db = new Database();
 	}
-
 }
-
 ?>
