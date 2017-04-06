@@ -4,7 +4,7 @@
 
 <?php
 if (!isset($_GET['catId']) && $_GET['catId']== NULL) {
-    echo "<script>window.loation='catlist.php';</script>";
+    echo "<script>window.location='catlist.php';</script>";
 }else{
     $id = $_GET['catId'];
 }

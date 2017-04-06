@@ -1,14 +1,28 @@
 <?php include_once 'inc/header.php'; ?>
 <?php include_once 'classes/Product.php'; ?>
+<?php include_once 'classes/Cart.php'; ?>
+
 <?php 
 
 if (!isset($_GET['proId']) && $_GET['proId'] == NULL) {
-    echo "<script>window.loation='404.php';</script>";
+    echo "<script>window.location='404.php';</script>";
 }else{
     $id = $_GET['proId'];
 }
 
  ?>
+
+ <?php 
+ $ct = new Cart();
+if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])) {
+	
+		$quantity = $_POST['quantity'];
+		$addCart  = $ct->addToCart($quantity,$id);
+
+}
+
+
+  ?>
 
  <div class="main">
     <div class="content">
@@ -36,10 +50,12 @@ if (!isset($_GET['proId']) && $_GET['proId'] == NULL) {
 						<p>Brand:<span><?php echo $result['brandName'];?></span></p>
 					</div>
 				<div class="add-cart">
-					<form action="cart.php" method="post">
-						<input type="number" class="buyfield" name="" value="1"/>
+
+					<form action="" method="post">
+						<input type="number" class="buyfield" name="quantity" value="1"/>
 						<input type="submit" class="buysubmit" name="submit" value="Buy Now"/>
-					</form>				
+					</form>	
+
 				</div>
 			</div>
 			<div class="product-desc">

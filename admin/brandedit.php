@@ -4,7 +4,7 @@
 
 <?php
 if (!isset($_GET['brandId']) && $_GET['brandId']== NULL) {
-    echo "<script>window.loation='brandlist.php';</script>";
+    echo "<script>window.location='brandlist.php';</script>";
 }else{
     $id = $_GET['brandId'];
 }
