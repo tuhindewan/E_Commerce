@@ -1,5 +1,9 @@
-<?php include_once '../helpers/Format.php'; ?>
-<?php include_once '../lib/Database.php'; ?>
+<?php 
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath."/../helpers/helpers.php");
+include_once ($filepath."/../lib/Database.php");
+?>
+
 
 <?php
 

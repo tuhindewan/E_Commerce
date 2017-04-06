@@ -1,9 +1,12 @@
 <?php 
-include_once 'lib/Session.php'; 
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath."/../lib/Session.php");
+include_once ($filepath."/../helpers/Format.php");
+include_once ($filepath."/../lib/Database.php");
+
 Session::init();
 ?>
-<?php include_once 'helpers/Format.php'; ?>
-<?php include_once 'lib/Database.php'; ?>
+
 
 <?php
   header("Cache-Control: no-cache, must-revalidate");
@@ -15,7 +18,7 @@ Session::init();
 <?php 
 
 spl_autoload_register(function($class){
-	include_once 'classes/'.$class.'.php';
+	include_once "classes/".$class.".php";
 	$db = new Database();
 	$fm = new Format();
 	$pd = new Product();
