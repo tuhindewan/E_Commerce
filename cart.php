@@ -1,11 +1,33 @@
 <?php include_once 'inc/header.php'; ?>
-<?php include_once 'classes/Cart.php'; ?>
+<?php include_once 'classes/Cart.php';
+$ct = new Cart();
+?>
+<?php 
+
+if (isset($_POST['submit'])) {
+	
+	$quantity = $_POST['quantity'];
+	$cartId = $_POST['cartId'];
+
+	$updateCart = $ct->updateCartQuantity($quantity,$cartId);
+}
+
+
+ ?>
 
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
 			<div class="cartpage">
 			    	<h2>Your Cart</h2>
+			    	<span style="color: green;font-size: 18px;">
+			    		
+			    		<?php 
+			    		if (isset($updateCart)) {
+			    			echo $updateCart;
+			    		}
+			    		 ?>
+			    	</span>
 						<table class="tblone">
 							<tr>
 								<th width="5%%">SL</th>
@@ -18,7 +40,7 @@
 							</tr>
 
 							<?php 
-							$ct = new Cart();
+							
 							$getPro = $ct->getCartProduct();
 							if ($getPro) {
 								$i=0;
@@ -36,8 +58,11 @@
 								<td>$ <?php echo $result['price']; ?></td>
 								<td>
 									<form action="" method="post">
+
+										<input type="hidden" name="cartId" value="<?php echo $result['cartId']; ?>"/>
 										<input type="number" name="quantity" value="<?php echo $result['quantity']; ?>"/>
 										<input type="submit" name="submit" value="Update"/>
+
 									</form>
 								</td>
 								<td>
