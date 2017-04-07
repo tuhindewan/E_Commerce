@@ -36,7 +36,7 @@
 								<td>$ <?php echo $result['price']; ?></td>
 								<td>
 									<form action="" method="post">
-										<input type="number" name="" value="1"/>
+										<input type="number" name="quantity" value="<?php echo $result['quantity']; ?>"/>
 										<input type="submit" name="submit" value="Update"/>
 									</form>
 								</td>
