@@ -88,6 +88,10 @@ class Brand
 			}
 	}
 
+	public function getLatestIphone(){
+		$query = "SELECT * FROM tbl_brand WHERE brandId = '1'";
+	}
+
 }
 
 ?>

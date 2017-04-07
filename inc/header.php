@@ -72,7 +72,7 @@ spl_autoload_register(function($class){
 								if ($getData) {
 									$sum = Session::get("sum");
 									$qty = Session::get("qty");
-									echo "$ ".$sum." |  QTY: ".$qty;
+									echo "$ ".$sum." | Qty: ".$qty;
 								}else{
 									echo "Empty";
 								}

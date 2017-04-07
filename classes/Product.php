@@ -206,6 +206,27 @@ class Product
 			   	return $result;
    }
 
+   public function getLatestIPhone(){
+		$query = "SELECT * FROM tbl_product WHERE brandId = '1' LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getLatestSamsung(){
+		$query = "SELECT * FROM tbl_product WHERE brandId = '3' LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getLatestAcer(){
+		$query = "SELECT * FROM tbl_product WHERE brandId = '4' LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getLatestCanon(){
+		$query = "SELECT * FROM tbl_product WHERE brandId = '5' LIMIT 1";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	
 
 }
 

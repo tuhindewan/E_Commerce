@@ -66,8 +66,7 @@ class Cart
 						 				WHERE cartId = '$cartId' ";
 						 	$updateRow = $this->db->update($query);
 						 	if ($updateRow) {
-									$msg = "<span class='success'>Quantity has been Updated Successfully.</span>";
-									return $msg;
+									header("Location:cart.php");
 								}else{
 									$msg = "<span class='error'>Quantity has not Updated !</span>";
 									return $msg;
