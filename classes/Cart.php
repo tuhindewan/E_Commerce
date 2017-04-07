@@ -74,5 +74,17 @@ class Cart
 								}
 	}
 
+	public function delProductByCart($delPro){
+
+		$delquery = "DELETE FROM tbl_cart WHERE cartId = '$delPro'";
+		$result= $this->db->delete($delquery);
+		if ($result) {
+				echo "<script>window.location=cart.php;</script>";
+			}else{
+				$msg = "<span class='error'>Product has not been Deleted !</span>";
+				return $msg;
+			}
+	}
+
 }
 ?>

@@ -2,6 +2,17 @@
 <?php include_once 'classes/Cart.php';
 $ct = new Cart();
 ?>
+
+<?php 
+
+if (isset($_GET['delPro'])) {
+	$delPro = $_GET['delPro'];
+
+	$delProduct = $ct->delProductByCart($delPro);
+}
+
+
+ ?>
 <?php 
 
 if (isset($_POST['submit'])) {
@@ -10,6 +21,9 @@ if (isset($_POST['submit'])) {
 	$cartId = $_POST['cartId'];
 
 	$updateCart = $ct->updateCartQuantity($quantity,$cartId);
+	if ($quantity<=0) {
+		$delProduct = $ct->delProductByCart($cartId);
+	}
 }
 
 
@@ -70,12 +84,12 @@ if (isset($_POST['submit'])) {
 
 									$total = $result['price'] * $result['quantity'];
 									echo $total;
-									$sum = $sum + $total;
+									
 									 ?>
 								</td>
-								<td><a href="">X</a></td>
+								<td><a onclick="return confirm('Are You Sure To DELETE !');" href="?delPro=<?php echo $result['cartId']; ?>">X</a></td>
 							</tr>
-							
+							<?php $sum = $sum + $total; ?>
 							<?php } } ?>
 						<table style="float:right;text-align:left;" width="40%">
 							<tr>
