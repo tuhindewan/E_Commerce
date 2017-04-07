@@ -3,6 +3,7 @@
 $ct = new Cart();
 ?>
 
+
 <?php 
 
 if (isset($_GET['delPro'])) {
@@ -59,6 +60,7 @@ if (isset($_POST['submit'])) {
 							if ($getPro) {
 								$i=0;
 								$sum = 0;
+								$qty = 0;
 								while ($result = $getPro->fetch_assoc()) {
 									
 								$i++;
@@ -89,8 +91,22 @@ if (isset($_POST['submit'])) {
 								</td>
 								<td><a onclick="return confirm('Are You Sure To DELETE !');" href="?delPro=<?php echo $result['cartId']; ?>">X</a></td>
 							</tr>
-							<?php $sum = $sum + $total; ?>
+							<?php 
+							$sum = $sum + $total; 
+							Session::set("sum",$sum);
+							$qty = $qty + $result['quantity'];
+							Session::set("qty",$qty);
+							?>
 							<?php } } ?>
+
+							<?php 
+
+							$getData = $ct->chkCartTable();
+							if ($getData) {
+								
+							
+
+							 ?>
 						<table style="float:right;text-align:left;" width="40%">
 							<tr>
 								<th>Sub Total : </th>
@@ -115,6 +131,13 @@ if (isset($_POST['submit'])) {
 								 </td>
 							</tr>
 					   </table>
+					   <?php } else{ 
+
+					   	echo "Cart Empty ! Please Shop Now";
+
+					   	}?>
+							
+					   
 					</div>
 					<div class="shopping">
 						<div class="shopleft">

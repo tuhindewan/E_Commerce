@@ -1,9 +1,10 @@
 <?php 
 $filepath = realpath(dirname(__FILE__));
-include_once ($filepath."/../lib/Session.php");
+include_once ($filepath."/../classes/Cart.php");
+$ct = new Cart();
 include_once ($filepath."/../helpers/Format.php");
 include_once ($filepath."/../lib/Database.php");
-
+include_once ($filepath."/../lib/Session.php");
 Session::init();
 ?>
 
@@ -22,7 +23,7 @@ spl_autoload_register(function($class){
 	$db = new Database();
 	$fm = new Format();
 	$pd = new Product();
-	$ct = new Cart();
+	
 });
 
  ?>
@@ -65,7 +66,20 @@ spl_autoload_register(function($class){
 					<div class="cart">
 						<a href="#" title="View my shopping cart" rel="nofollow">
 								<span class="cart_title">Cart</span>
-								<span class="no_product">(empty)</span>
+								<span class="no_product">
+								<?php 
+								$getData = $ct->chkCartTable();
+								if ($getData) {
+									$sum = Session::get("sum");
+									$qty = Session::get("qty");
+									echo "$ ".$sum." |  QTY: ".$qty;
+								}else{
+									echo "Empty";
+								}
+								
+
+								 ?>
+								</span>
 							</a>
 						</div>
 			      </div>
