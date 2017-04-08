@@ -4,6 +4,14 @@ include_once 'classes/Customer.php';
 
 $cmr = new Customer();
 ?>
+<?php 
+
+$custlogin = Session::get("custlogin");
+if ($custlogin==true) {
+	header("Location:order.php");
+}
+
+ ?>
 	<?php 
 
 	if (isset($_POST['login'])) {

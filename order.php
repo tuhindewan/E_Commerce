@@ -1,6 +1,13 @@
 <?php include_once 'inc/header.php'; ?>
 
+<?php 
 
+$custlogin = Session::get("custlogin");
+if ($custlogin==false) {
+	header("Location:login.php");
+}
+
+ ?>
 
  <div class="main">
     <div class="content">
