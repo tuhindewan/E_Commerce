@@ -115,7 +115,24 @@ if ($custlogin==false) {?>
 	  <li><a href="index.php">Home</a></li>
 	  <li><a href="products.php">Products</a> </li>
 	  <li><a href="topbrands.php">Top Brands</a></li>
-	  <li><a href="cart.php">Cart</a></li>
+	<?php 
+
+	$chkcart = $ct->chkCartTable();
+	if ($chkcart) { ?>
+		
+	<li><a href="cart.php">Cart</a></li>
+
+	<?php } ?>
+	  
+
+	  <?php 
+	  $login = Session::get("custlogin");
+	  if ($login==true) {?>
+	  	
+	  	<li><a href="profile.php">Profile</a> </li>
+	  
+	  <?php } ?>
+	  
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>

@@ -7,7 +7,7 @@ if ($custlogin==false) {
 	header("Location:login.php");
 }
 
- ?>
+?>
 
  <div class="main">
     <div class="content">
