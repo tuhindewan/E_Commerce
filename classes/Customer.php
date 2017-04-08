@@ -81,5 +81,40 @@ class Customer
 			$result = $this->db->select($query);
 			return $result;
 		}
+
+		public function customerUpdate($data,$cmrid){
+		$name = mysqli_real_escape_string($this->db->link,$data['name']);
+		$address = mysqli_real_escape_string($this->db->link,$data['address']);
+		$city = mysqli_real_escape_string($this->db->link,$data['city']);
+		$country = mysqli_real_escape_string($this->db->link,$data['country']);
+		$zip = mysqli_real_escape_string($this->db->link,$data['zip']);
+		$phone = mysqli_real_escape_string($this->db->link,$data['phone']);
+		$email = mysqli_real_escape_string($this->db->link,$data['email']);
+
+		if (empty($name) or empty($address) or empty($city) or empty($country) or empty($zip) or empty($phone) or empty($email)) {
+			$msg = "<span style='color:red;font-size:15px;'>Fields Must not be Empty !</span>";
+				return $msg;
+			}else{
+
+				 	$query = "UPDATE tbl_customer
+						 				SET 
+						 				name     ='$name',
+						 				address	 ='$address',
+						 				city	 ='$city',
+						 				country  ='$country',
+						 				zip		 ='$zip',
+						 				phone	 ='$phone',
+						 				email	 ='$email'
+						 				WHERE customerId = '$cmrid' ";
+						 	$updateRow = $this->db->update($query);
+						 	if ($updateRow) {
+									$msg = "<span style='color:green;font-size:15px;'>Your Details has been Updated Successfully.</span>";
+									return $msg;
+								}else{
+									$msg = "<span style='color:red;font-size:15px;'>Details has not Updated !</span>";
+									return $msg;
+								}
+							}
+		}
 }
 ?>

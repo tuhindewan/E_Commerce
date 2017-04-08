@@ -13,12 +13,20 @@ $custlogin = Session::get("custlogin");
 if ($custlogin==false) {
 	header("Location:login.php");
 }
+?>
+<?php 
+if (isset($_POST['submit'])) {
 
+	$cmrid = Session::get("cmrId");
+		
+    $Updatecmr = $cmr ->customerUpdate($_POST,$cmrid);
+}
 ?>
 <style>
 	.tblone{width: 550px;margin: 0 auto;border: 2px solid #ddd;}
 	.tblone tr td{text-align: justify;}
 	.tblone h2  {text-align: center;}
+	.tblone input[type="text"]{width: 400px;font-size: 15px;padding: 5px;}
 </style>
  <div class="main">
     <div class="content">
@@ -28,58 +36,56 @@ if ($custlogin==false) {
     	$getcust = $cmr -> getCustomerData($id);
     	if ($getcust) {
     		while ($result = $getcust->fetch_assoc()) {
-    			
-    		
-    	
     	 ?>
+    	 <form action="" method="post">
 		<table class="tblone">
+			<?php 
+
+				if (isset($Updatecmr)) {
+					
+					echo "<tr><td colspan='2'>".$Updatecmr."</td></tr>";
+				}
+			 ?>
 			<tr>
-				<td colspan="3"><h2>Your Profile Details</h2></td>			
+				<td colspan="2"><h2>Update Profile Details</h2></td>			
 			</tr>
 			<tr>
 				<td width="20%">Name</td>
-				<td width="5%">:</td>
-				<td><?php echo $result['name']; ?></td>
+				<td><input type="text" name="name" value="<?php echo $result['name']; ?>"></td>
 			</tr>
 			
 			<tr>
 				<td>Address</td>
-				<td>:</td>
-				<td><?php echo $result['address']; ?></td>
+				<td><input type="text" name="address" value="<?php echo $result['address']; ?>"></td>
 			</tr>
 			<tr>
 				<td>City</td>
-				<td>:</td>
-				<td><?php echo $result['city']; ?></td>
+				<td><input type="text" name="city" value="<?php echo $result['city']; ?>"></td>
 			</tr>
 			<tr>
 				<td>Country</td>
-				<td>:</td>
-				<td><?php echo $result['country']; ?></td>
+				<td><input type="text" name="country" value="<?php echo $result['country']; ?>"></td>
 			</tr>
 			<tr>
 				<td>Zipcode</td>
-				<td>:</td>
-				<td><?php echo $result['zip']; ?></td>
+				<td><input type="text" name="zip" value="<?php echo $result['zip']; ?>"></td>
 			</tr>
 			<tr>
 				<td>Email</td>
-				<td>:</td>
-				<td><?php echo $result['email']; ?></td>
+				<td><input type="text" name="email" value="<?php echo $result['email']; ?>"></td>
 			</tr>
 			<tr>
 				<td>Phone</td>
-				<td>:</td>
-				<td><?php echo $result['phone']; ?></td>
+				<td><input type="text" name="phone" value="<?php echo $result['phone']; ?>"></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td></td>
-				<td><a href="editProfile.php">Update Details</a></td>
+				<td><input type="submit" name="submit" value="Save"></td>
 			</tr>
 
 			
 		</table>
+		</form>
 		<?php } }  ?>		
  		</div>
  	</div>
