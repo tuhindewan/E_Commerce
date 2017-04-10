@@ -121,6 +121,7 @@ if ($custlogin==false) {?>
 	if ($chkcart) { ?>
 		
 	<li><a href="cart.php">Cart</a></li>
+	<li><a href="payment.php">Payment</a></li>
 
 	<?php } ?>
 	  
