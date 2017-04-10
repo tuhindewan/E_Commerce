@@ -1,6 +1,10 @@
 <?php include_once 'inc/header.php'; ?>
 <?php include_once 'classes/Product.php'; ?>
-<?php include_once 'classes/Cart.php'; ?>
+<?php 
+include_once 'classes/Cart.php'; 
+
+?>
+
 <?php include_once 'classes/Category.php'; ?>
 <?php 
 include_once 'classes/Customer.php';
@@ -12,6 +16,19 @@ $cmr = new Customer();
 $custlogin = Session::get("custlogin");
 if ($custlogin==false) {
 	header("Location:login.php");
+}
+
+?>
+
+<?php 
+$ct = new Cart();
+if (isset($_GET['orderId']) && $_GET['orderId']=='order') {
+    $cmrId = Session::get('cmrId');
+
+    $insertOrder = $ct->productOrder($cmrId);
+
+    $delCart = $ct->delCustomerCart();
+    header("Location:success.php");
 }
 
 ?>
@@ -31,7 +48,7 @@ if ($custlogin==false) {
     	<div class="section group">
     	   <div class="division">
                <table class="tblone">
-                            <tr>
+                       <tr>
                                 <th >NO</th>
                                 <th >Product</th>
                                 <th >Price</th>
@@ -169,6 +186,6 @@ if ($custlogin==false) {
            </div>
  		</div>
  	</div>
-    <div class="ordernow"><a href="">Order</a></div>
+    <div class="ordernow"><a href="?orderId=order">Order</a></div>
 	</div>
   <?php include_once 'inc/footer.php'; ?>

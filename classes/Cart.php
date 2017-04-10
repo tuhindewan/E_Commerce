@@ -98,5 +98,24 @@ class Cart
 		$this->db->delete($query);
 	}
 
+	public function productOrder($cmrId){
+		$sId    = session_id();
+		$query  = "SELECT * FROM tbl_cart WHERE sId = '$sId' ";
+	   	$getPr0 = $this->db->select($query);
+	   	if ($getPro) {
+	   		while ($result = $getPro ->fetch_assoc()) {
+	   			$productId = $result['productId'];
+	   			$productName = $result['productName'];
+	   			$quantity = $result['quantity'];
+	   			$price = $result['price'];
+	   			$image = $result['image'];
+
+	   	$query = "INSERT INTO tbl_order (cmrId,productId,productName,quantity,price,image) VALUES ('$cmrId','$productId','$productName','$quantity','$price','$image')";
+	 	     $insert_row = $this->db->insert($query);
+	   		}
+	   	}
+	   	
+	}
+
 }
 ?>
