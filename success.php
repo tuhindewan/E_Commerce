@@ -41,7 +41,7 @@ if ($custlogin==false) {
 
           ?>
     	 	<h2>Success</h2>
-            <p>Total Payable Amount(Including Vat) : $
+            <p style="color: red;">Total Payable Amount(Including Vat) : $
             <?php 
 
             $vat = $sum*0.1;

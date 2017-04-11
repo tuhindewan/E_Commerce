@@ -105,6 +105,7 @@ if (!isset($_GET['id'])) {
 							Session::set("qty",$qty);
 							?>
 							<?php } } ?>
+							</table>
 
 							<?php 
 

@@ -8,7 +8,7 @@ $cmr = new Customer();
 
 $custlogin = Session::get("custlogin");
 if ($custlogin==true) {
-	header("Location:order.php");
+	header("Location:orderdetais.php");
 }
 
  ?>
