@@ -123,9 +123,58 @@ class Cart
 	}
 
 	public function getOrderProduct($cmrId){
-		$query = "SELECT * FROM tbl_order WHERE cmrId = '$cmrId' ORDER BY orderId DESC ";
+		$query = "SELECT * FROM tbl_order WHERE cmrId = '$cmrId' ORDER BY date DESC ";
 	   	$result = $this->db->select($query);
 	   	return $result;
+	}
+	public function chkorderTable($cmrId){
+		$query = "SELECT * FROM tbl_order WHERE cmrId = '$cmrId'  ";
+	   	$result = $this->db->select($query);
+	   	return $result;
+	}
+
+	public function getAllOrderProduct(){
+		$query = "SELECT * FROM tbl_order ORDER BY date DESC ";
+	   	$result = $this->db->select($query);
+	   	return $result;
+	}
+
+	public function shiftProduct($id,$time){
+		$query = "UPDATE tbl_order SET status = '1' WHERE cmrId = '$id' AND date = '$time' ";
+		$update = $this->db->update($query);
+		if ($update) {
+			
+		$msg = "<span style='color:green;font-size:15px;'> Updated Successfully.</span>";
+							return $msg;
+						}else{
+							$msg = "<span style='color:red;font-size:15px;'> Not Updated !</span>";
+							return $msg;
+						}
+	}
+
+	public function delshiftProduct($id,$time){
+		$query = "DELETE FROM tbl_order WHERE  cmrId = '$id' AND date = '$time'";
+		$result= $this->db->delete($query);
+		if ($result) {
+				$msg = "<span class='success'> Deleted Successfully.</span>";
+				return $msg;
+			}else{
+				$msg = "<span class='error'>Not Deleted !</span>";
+				return $msg;
+			}
+	}
+
+	public function shiftConfirm($cmrId, $time){
+		$query = "UPDATE tbl_order SET status = '2' WHERE cmrId = '$cmrId' AND date = '$time' ";
+		$update = $this->db->update($query);
+		if ($update) {
+			
+		$msg = "<span style='color:green;font-size:15px;'> Updated Successfully.</span>";
+							return $msg;
+						}else{
+							$msg = "<span style='color:red;font-size:15px;'> Not Updated !</span>";
+							return $msg;
+						}
 	}
 
 }

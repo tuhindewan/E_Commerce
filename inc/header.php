@@ -124,6 +124,14 @@ if ($custlogin==false) {?>
 	<li><a href="payment.php">Payment</a></li>
 
 	<?php } ?>
+	<?php 
+	$cmrId = Session::get('cmrId');
+	$chkorder = $ct->chkorderTable($cmrId);
+	if ($chkorder) { ?>
+
+	<li><a href="orderdetails.php">Order</a></li>
+
+	<?php } ?>
 	  
 
 	  <?php 

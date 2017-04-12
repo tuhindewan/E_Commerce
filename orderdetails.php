@@ -2,6 +2,8 @@
 <?php
  include_once 'helpers/Format.php'; 
  $fm = new Format();
+ include_once ($filepath."/../classes/Cart.php");
+ $ct = new Cart();
 ?>
 
 <?php 
@@ -12,6 +14,18 @@ if ($custlogin==false) {
 }
 
 ?>
+<?php 
+
+if (isset($_GET['conId'])) {
+	$cmrId = $_GET['conId'];
+	$time = $_GET['time'];
+
+	$confirmData = $ct ->shiftConfirm($cmrId, $time);
+
+}
+
+
+ ?>
 <style>
 	.tblone tr td {text-align: justify;}
 
@@ -49,7 +63,7 @@ if ($custlogin==false) {
 								<td><?php echo $i; ?></td>
 								<td><?php echo $result['productName']; ?></td>
 								<td><img src="admin/<?php echo $result['image']; ?>" alt=""/></td>
-								<td>$ <?php echo $result['quantity']; ?></td>
+								<td><?php echo $result['quantity']; ?></td>
 								<td>
 									<?php 
 
@@ -61,10 +75,12 @@ if ($custlogin==false) {
 								<td><?php echo $fm->formatDate($result['date']); ?></td>
 								<td>
 								<?php  
-								if ($result['status']==0) {
+								if ($result['status']=='0') { 
 									echo "Pending";
-								}else{
-									echo "Shifted";
+							 	}elseif($result['status']=='1'){?>
+									<a href="?conId=<?php echo $cmrId;?>&time=<?php echo $result['date'];?>">Shifted</a>
+							<?php	}else{
+									echo "Confirm";
 								}
 
 								?>
@@ -72,7 +88,7 @@ if ($custlogin==false) {
 								</td>
 								<?php 
 
-								if ($result['status']==1) { ?>
+								if ($result['status']=='2') { ?>
 									<td><a onclick="return confirm('Are You Sure To DELETE !');" href="">X</a></td>
 								<?php } else{ ?>
 								<td>N/A</td>
