@@ -1,4 +1,20 @@
+<?php 
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath."/lib/Session.php");
+$custlogin = Session::get("custlogin");
+if ($custlogin==false) {
+	header("Location:login.php");
+}
+
+?>
 <?php include_once 'inc/header.php'; ?>
+<?php 
+$custlogin = Session::get("custlogin");
+if ($custlogin==false) {
+	header("Location:login.php");
+}
+
+?>
 <?php 
 include_once 'classes/Product.php'; 
 $pd = new Product();
