@@ -1,14 +1,16 @@
 <?php include_once 'inc/header.php'; ?>
-<?php include_once 'classes/Product.php'; ?>
+<?php 
+include_once 'classes/Product.php'; 
+$pd = new Product();
+?>
 <?php include_once 'classes/Cart.php'; ?>
 <?php include_once 'classes/Category.php'; ?>
 
 <?php 
 
-if (!isset($_GET['proId']) && $_GET['proId'] == NULL) {
-    echo "<script>window.location='404.php';</script>";
-}else{
-    $id = $_GET['proId'];
+if (isset($_GET['proId'])) {
+
+    $proId = $_GET['proId'];
 }
 
  ?>
@@ -18,20 +20,28 @@ if (!isset($_GET['proId']) && $_GET['proId'] == NULL) {
 if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])) {
 	
 		$quantity = $_POST['quantity'];
-		$addCart  = $ct->addToCart($quantity,$id);
+		$addCart  = $ct->addToCart($quantity,$proId);
 
 }
+?>
 
+<?php
 
-  ?>
+if (isset($_POST['compare'])) {
+	$productId = $_POST['productId'];
+	$cmrId = Session::get('cmrId');
+	$insertCompare = $pd->insertCompareData($productId, $cmrId);
+}
+
+?>
 
  <div class="main">
     <div class="content">
     	<div class="section group">
 				<div class="cont-desc span_1_of_2">
 				<?php 
-				$pd = new Product();
-				$getPd = $pd->getSingleProduct($id);
+				
+				$getPd = $pd->getSingleProduct($proId);
 				if ($getPd) {
 					while ($result = $getPd->fetch_assoc()) {
 						
@@ -56,12 +66,28 @@ if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])) {
 						<input type="number" class="buyfield" name="quantity" value="1"/>
 						<input type="submit" class="buysubmit" name="submit" value="Buy Now"/>
 					</form>	
+			    </div>
 					<span style="color: red;font-size: 19px"><?php 
 
 					if (isset($addCart )) {
 					 	echo $addCart ;
-					 } ?></span>
-				</div>
+					 } ?>
+					 	
+					 </span>
+					 <span style="color: green;font-size: 19px">
+					 <?php if (isset($insertCompare)) {
+					 	echo $insertCompare;
+					 } ?>
+					 </span>
+				<?php $login = Session::get("custlogin");
+	  				if ($login==true) { ?>
+				  <div class="add-cart">
+					<form action="" method="post">
+						<input type="hidden" class="buyfield" name="productId" value="<?php echo $result['productId'];?>"/>
+						<input type="submit" class="buysubmit" name="compare" value="Add To Compare"/>
+					</form>	
+			    </div>
+			    <?php } ?>
 			</div>
 			<div class="product-desc">
 			<h2>Product Details</h2>

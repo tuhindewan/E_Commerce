@@ -3,6 +3,8 @@ $filepath = realpath(dirname(__FILE__));
 include_once ($filepath."/../classes/Cart.php");
 $ct = new Cart();
 include_once ($filepath."/../helpers/Format.php");
+include_once ($filepath."/../classes/Product.php");
+$pd = new Product();
 include_once ($filepath."/../lib/Database.php");
 include_once ($filepath."/../lib/Session.php");
 Session::init();
@@ -22,7 +24,7 @@ spl_autoload_register(function($class){
 	include_once "classes/".$class.".php";
 	$db = new Database();
 	$fm = new Format();
-	$pd = new Product();
+	
 	
 });
 
@@ -85,8 +87,9 @@ spl_autoload_register(function($class){
 			      </div>
 <?php 
 if (isset($_GET['cid'])) {
-
+	$cmrId = Session::get('cmrId');
 	$delCart = $ct->delCustomerCart();
+	$delComData = $pd->delCompareData($cmrId);
 	Session::destroy();
 }
  ?>			      
@@ -113,7 +116,6 @@ if ($custlogin==false) {?>
 <div class="menu">
 	<ul id="dc_mega-menu-orange" class="dc_mm-orange">
 	  <li><a href="index.php">Home</a></li>
-	  <li><a href="products.php">Products</a> </li>
 	  <li><a href="topbrands.php">Top Brands</a></li>
 	<?php 
 
@@ -136,12 +138,22 @@ if ($custlogin==false) {?>
 
 	  <?php 
 	  $login = Session::get("custlogin");
-	  if ($login==true) {?>
+	  if ($login==true) { ?>
 	  	
 	  	<li><a href="profile.php">Profile</a> </li>
 	  
 	  <?php } ?>
+
+	  <?php 
+		$cmrId = Session::get('cmrId');
+		$getComData = $pd->getComapreData($cmrId);
+		if ($getComData) {
+
+	   ?>
 	  
+	  <li><a href="compare.php">Compare</a> </li>
+
+	  <?php } ?>
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>
