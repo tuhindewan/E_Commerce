@@ -154,6 +154,16 @@ if ($custlogin==false) {?>
 	  <li><a href="compare.php">Compare</a> </li>
 
 	  <?php } ?>
+	  <?php 
+		$cmrId = Session::get('cmrId');
+		$getwishData = $pd->getWlistData($cmrId);
+		if ($getwishData) {
+
+	   ?>
+	  
+	  <li><a href="wishlist.php">WishList</a> </li>
+
+	  <?php } ?>
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>

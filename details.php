@@ -35,6 +35,15 @@ if (isset($_POST['compare'])) {
 
 ?>
 
+<?php 
+if (isset($_POST['wList'])) {
+	$productId = $_POST['productId'];
+	$cmrId = Session::get('cmrId');
+	$saveWlist = $pd->saveWlistData($productId, $cmrId);
+}
+
+ ?>
+
  <div class="main">
     <div class="content">
     	<div class="section group">
@@ -79,13 +88,26 @@ if (isset($_POST['compare'])) {
 					 	echo $insertCompare;
 					 } ?>
 					 </span>
+					 <span style="color: green;font-size: 19px">
+					 <?php if (isset($saveWlist)) {
+					 	echo $saveWlist;
+					 } ?>
+					 </span>
 				<?php $login = Session::get("custlogin");
 	  				if ($login==true) { ?>
 				  <div class="add-cart">
+				  <div class="myButton" style="width: 100%; float: left; margin-right: 40px; margin-top: 10px">
 					<form action="" method="post">
 						<input type="hidden" class="buyfield" name="productId" value="<?php echo $result['productId'];?>"/>
 						<input type="submit" class="buysubmit" name="compare" value="Add To Compare"/>
 					</form>	
+					</div>
+					<div class="myButton" style="width: 100%; float: left; margin-right: 40px; margin-top: 10px">
+					<form action="" method="post">
+					<input type="hidden" class="buyfield" name="productId" value="<?php echo $result['productId'];?>"/>
+						<input type="submit" class="buysubmit" name="wList" value="Save To WishList"/>
+					</form>	
+					</div>
 			    </div>
 			    <?php } ?>
 			</div>
